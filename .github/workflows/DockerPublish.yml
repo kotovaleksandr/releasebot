@@ -38,7 +38,7 @@ jobs:
             [ "$VERSION" == "$default-branch" ] && VERSION=latest
           
             #Tag
-            docker tag IMAGE_ID docker.pkg.github.com/kotovaleksandr/repository-name/IMAGE_NAME:VERSION
+            docker tag IMAGE_ID docker.pkg.github.com/kotovaleksandr/repository-name/$IMAGE_NAME:$VERSION
 
             #Publish
-            docker push docker.pkg.github.com/kotovaleksandr/repository-name/IMAGE_NAME:VERSION
+            docker push docker.pkg.github.com/kotovaleksandr/repository-name/$IMAGE_NAME:$VERSION
