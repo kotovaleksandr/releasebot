@@ -32,9 +32,11 @@ jobs:
             [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
             # Use Docker `latest` tag convention
             [ "$VERSION" == "$default-branch" ] && VERSION=latest
-          
-            #Tag
-            docker tag $IMAGE_ID docker.pkg.github.com/kotovaleksandr/repository-name/$IMAGE_NAME:$VERSION
-
-            #Publish
-            docker push docker.pkg.github.com/kotovaleksandr/repository-name/$IMAGE_NAME:$VERSION
+            IMAGE_ID=docker.pkg.github.com/${{ github.repository_owner }}/$IMAGE_NAME
+            # Change all uppercase to lowercase
+            IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+            
+            echo IMAGE_ID=$IMAGE_ID
+            echo VERSION=$VERSION
+            docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+            docker push $IMAGE_ID:$VERSION
