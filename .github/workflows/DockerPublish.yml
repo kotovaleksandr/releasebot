@@ -27,7 +27,7 @@ jobs:
       - name: Build docker images
         run: docker build . -t $IMAGE_NAME
       - name: Log into GitHub Container Registry
-        run: echo "$PAT" | docker login -u kotovaleksandr --password-stdin docker.pkg.github.com
+        run: echo ${{ secrets.PAT }} | docker login -u kotovaleksandr --password-stdin docker.pkg.github.com
       - name: Push image to GitHub Container Registry
         run: |
             # Strip git ref prefix from version
