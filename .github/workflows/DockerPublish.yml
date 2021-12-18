@@ -20,8 +20,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Build docker images
+      - name: Build docker image x86
         run: docker build . -t $IMAGE_NAME
+      - name: Buil docker image arm
+        run:  docker build . -t $IMAGE_NAME-arm -f Dockerfile-arm
       - name: Log into GitHub Container Registry
         run: echo ${{ secrets.PAT }} | docker login -u kotovaleksandr --password-stdin ghcr.io
       - name: Push image to GitHub Container Registry
@@ -41,3 +43,5 @@ jobs:
             echo VERSION=$VERSION
             docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
             docker push $IMAGE_ID:$VERSION
+            docker tag $IMAGE_NAME-arm $IMAGE_ID-arm:$VERSION
+            docker push $IMAGE_ID-arm:$VERSION
