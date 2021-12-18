@@ -7,6 +7,5 @@ RUN go build
 
 FROM arm32v6/alpine
 COPY --from=builder /src/releasebot /app/
-RUN chmod +x /app/releasebot
 WORKDIR /app
 ENTRYPOINT [/app/releasebot]
