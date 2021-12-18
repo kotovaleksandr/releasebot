@@ -5,7 +5,7 @@ ENV GOOS=linux
 ENV GOARCH=arm
 RUN go build
 
-FROM arm32v7/alpine
+FROM arm32v7/ubuntu
 COPY --from=builder /src/releasebot /app/
 WORKDIR /app
 ENTRYPOINT [/app/releasebot]
