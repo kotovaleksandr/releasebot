@@ -4,9 +4,9 @@ WORKDIR /src
 ENV GOOS=linux
 ENV GOARCH=arm
 ENV CGO_ENABLED=0
-RUN go build -a -installsuffix cgo
+RUN go build
 
 FROM arm32v7/alpine
 COPY --from=builder /src/releasebot /app/
 WORKDIR /app
-ENTRYPOINT [/app/releasebot]
+ENTRYPOINT ["/app/releasebot"]
