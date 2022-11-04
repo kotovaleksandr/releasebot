@@ -73,7 +73,7 @@ func GetUsers() []int64 {
 func AddUser(user int64) {
 	log.Printf("Add user %d to file %v", user, DataFileName)
 	file, err := os.Open(DataFileName)
-	if !os.IsExist(err) {
+	if err != nil && !os.IsExist(err) {
 		log.Printf("Data file not found, create them")
 		file, err = os.Create(DataFileName)
 		if err != nil {
